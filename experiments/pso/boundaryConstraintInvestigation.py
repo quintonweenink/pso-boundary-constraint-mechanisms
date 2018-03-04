@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
-import numpy as np
 
-from experiments.pso.boundaryConstraintPSO import BoundaryConstraintPSO
+from src.boundaryConstraints.boundaryConstraintPSO import BoundaryConstraintPSO
 
 ITERATIONS = 5000
 ITERATIONS_SAMPLE_SIZE = 100
@@ -14,15 +13,7 @@ COGNITIVE_CONSTANT = SOCIAL_CONSTANT = 1.4
 
 V_MAX = 0.1
 
-from experiments.problems.functions.absoluteValue import AbsoluteValue
-from experiments.problems.functions.ackley import Ackley
-from experiments.problems.functions.elliptic import Elliptic
-from experiments.problems.functions.griewank import Griewank
-from experiments.problems.functions.hyperellipsoid import Hyperellipsoid
-from experiments.problems.functions.quartic import Quartic
 from experiments.problems.functions.salomon import Salomon
-from experiments.problems.functions.schafferF6 import SchafferF6
-from experiments.problems.functions.schwefelF2_26 import SchwefelF2_26
 
 problem_list = [
     # AbsoluteValue(),
