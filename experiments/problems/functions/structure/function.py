@@ -14,7 +14,7 @@ class Function(object):
         pass
 
     def getDescription(self):
-        return self.__class__.__name__ + " function"
+        return self.__class__.__name__
 
     @abc.abstractmethod
     def getBounds(self):

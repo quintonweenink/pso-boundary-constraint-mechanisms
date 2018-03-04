@@ -1,4 +1,5 @@
 import math
+import numpy as np
 
 from mlpy.numberGenerator.bounds import Bounds
 from experiments.problems.functions.structure.function import Function
@@ -6,20 +7,11 @@ from experiments.problems.functions.structure.function import Function
 class SchafferF6(Function):
 
     def function(self, x):
-        if len(x) <= 2:
-            return self.schafferF6HelperFunction(0, x)
-        else:
-            total = 0
-            for i in range(len(x)):
-                total += self.weights[i] * \
-                         self.schafferF6HelperFunction(i, x)
-            return total
-
-    def schafferF6HelperFunction(self, i, x):
-        xi = x[i]
-        yi = x[(i + 1) % len(x)]
-        sqr = xi ** 2 + yi ** 2
-        return 0.5 + (math.sin(math.sqrt(sqr)) - 0.5) / (1 + 0.001 * sqr) ** 2
+        x_squared = np.power(x, 2)
+        one_index_sum = x_squared[:-1] + x_squared[1:]
+        numerator = np.power(np.sin(one_index_sum), 2) - 0.5
+        denominator = np.power(1 + (0.001 * (one_index_sum)), 2)
+        return np.sum(0.5 + np.divide(numerator, denominator))
 
     def getBounds(self):
-        return Bounds(-1.28, 1.28)
+        return Bounds(-100, 100)

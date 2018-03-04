@@ -11,4 +11,4 @@ class Salomon(Function):
         return -np.cos(2 * math.pi * np.sum(x_squared)) + (0.1 * np.sqrt(np.sum(x_squared + 1)))
 
     def getBounds(self):
-        return Bounds(-1.28, 1.28)
+        return Bounds(-100, 100)

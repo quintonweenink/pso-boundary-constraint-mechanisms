@@ -3,17 +3,20 @@ import matplotlib.pyplot as plt
 from src.boundaryConstraints.boundaryConstraintPSO import BoundaryConstraintPSO
 
 ITERATIONS = 5000
-ITERATIONS_SAMPLE_SIZE = 100
-SAMPLES = 1
+ITERATIONS_SAMPLE_SIZE = 10
+SAMPLES = 50
 
 NUM_PARTICLES = 30
 NUM_DIMENSIONS = 30
 INERTIA_WEIGHT = 0.7
 COGNITIVE_CONSTANT = SOCIAL_CONSTANT = 1.4
 
-V_MAX = 0.1
-
+from experiments.problems.functions.absoluteValue import AbsoluteValue
+from experiments.problems.functions.ackley import Ackley
+from experiments.problems.functions.hyperellipsoid import Hyperellipsoid
+from experiments.problems.functions.quartic import Quartic
 from experiments.problems.functions.salomon import Salomon
+from experiments.problems.functions.schafferF6 import SchafferF6
 
 problem_list = [
     # AbsoluteValue(),
@@ -22,8 +25,8 @@ problem_list = [
     # Griewank(),
     # Hyperellipsoid(),
     # Quartic(),
-    Salomon(),
-    # SchafferF6(),
+    # Salomon(),
+    SchafferF6(),
     # SchwefelF2_26(),
 ]
 
@@ -50,7 +53,7 @@ for problem in problem_list:
     print("Problem: " + problem.getDescription())
     for boundaryConstraint in boundaryConstraint_list:
 
-        print("Boundary Constraint: " + boundaryConstraint[1])
+        print(boundaryConstraint[1])
         pso_errors = []
         pso_error = []
 
@@ -68,14 +71,11 @@ for problem in problem_list:
             pso.weight = INERTIA_WEIGHT
             pso.cognitiveConstant = COGNITIVE_CONSTANT
             pso.socialConstant = SOCIAL_CONSTANT
-            pso.vmax = V_MAX
 
-            pso.color = 'black'
             trainingErrors, trainingError = pso.train(ITERATIONS, ITERATIONS_SAMPLE_SIZE)
 
             pso_errors.append(trainingErrors)
             pso_error.append(trainingError)
-            print(".")
 
         iterations = [y[1] for y in pso_errors[0]]
 
@@ -87,7 +87,6 @@ for problem in problem_list:
 
         bc_pso_errors_mean.append(pso_errors_mean)
 
-        print(boundaryConstraint[1])
         print(pso_error_mean)
         print('(' + str(pso_error_std) + ')')
 

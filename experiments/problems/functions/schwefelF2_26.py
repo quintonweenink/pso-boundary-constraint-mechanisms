@@ -9,7 +9,7 @@ class SchwefelF2_26(Function):
         return -np.sum(x * np.sin(np.sqrt(np.abs(x))))
 
     def getBounds(self):
-        return Bounds(-1.28, 1.28)
+        raise Exception("Bounds not specified")
 
     def test(self):
         assert (-np.sin(1) == self.function(np.array([1])))
